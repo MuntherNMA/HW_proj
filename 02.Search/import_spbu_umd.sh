@@ -11,7 +11,6 @@ SOURCE=""
 DESTINATION=""
 PROBE=false
 
-# Parse command-line options
 if ! OPTIONS=$(getopt -o s:d:p --long source:,destination:,probe -- "$@"); then
     echo "Error: Failed parsing options." >&2
     exit 1
@@ -44,13 +43,11 @@ while true; do
     esac
 done
 
-# Validate input parameters
 if [ -z "$SOURCE" ] || [ -z "$DESTINATION" ]; then
     show_help
     exit 1
 fi
 
-# Create destination directory if it does not exist
 mkdir -p "$DESTINATION"
 
 dl_spbu_s_e () {
