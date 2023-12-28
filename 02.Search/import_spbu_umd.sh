@@ -59,13 +59,14 @@ dl_spbu_s_e () {
 
 dl_spbu_oop () {
     local result
-    result=$(dl_spbu_s_e | grep -o -E "'https://nc\.spbu\.ru/.+?'" | sed "s/'//g" | sort | uniq)
+    result=$(dl_spbu_s_e | grep -o -E "'https://nc\.spbu\.ru/.+?'" | sed "s/'//g" | \ grep -oP 'https://nc\.spbu\.ru/s/[^\s<>"'\'']+' | sort | uniq)
     if [ "$PROBE" = true ]; then
         echo "$result" | sort -R | head -n 10
     else
         echo "$result"
     fi
 }
+
 
 function download {
     local url="$1"
